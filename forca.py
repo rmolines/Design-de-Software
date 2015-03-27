@@ -10,15 +10,15 @@ from random import randint
 
 import turtle
     
-j = turtle.Screen ()
-j.screensize (640, 480)
+janela = turtle.Screen ()
+janela.screensize (640, 480)
 
 text = open ("entrada.txt", encoding = "utf-8")
 
-y = randint (0,11)
+sorteio = randint (0,11)
 
 t = text.readlines ()
-p = "abc"
+p = "banana"
 
 d = turtle.Turtle ()
 d.penup ()
@@ -39,15 +39,37 @@ linhas ()
 d.penup ()
 d.back (25*len (p)+5*len (p))
 
-c = turtle.textinput ("Digite seu chute", "Digite seu chute")
 
-if p.find (c) == True:
-    d.write (c)
+
+acertos = []
+
+
+def acharletra (c):
+    
+    
+    y = 0
+    while p.find(c, y) != -1:
+        d.forward (p.find (c, y)*25+p.find(c, y)*5)
+        d.write (c.upper(), font=("Arial", 25, "bold"))
+        d.back (p.find (c, y)*25+p.find(c, y)*5)
+        y += p.find (c)+1
+        
+        
+def acertarpalavra ():
+    
+    chute = turtle.textinput ("Digite seu chute", "Digite seu chute")
+    
+    
+        
+        
+acharletra ()
     
 
+
+    
+    
         
-        
-j.exitonclick ()
+janela.exitonclick ()
         
     
     
