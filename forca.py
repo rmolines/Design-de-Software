@@ -43,9 +43,11 @@ d.back (25*len (p)+5*len (p))
 
 acertos = []
 
+letras = 0
 
 def acharletra (c):
     
+    global letras    
     
     y = 0
     while p.find(c, y) != -1:
@@ -53,17 +55,20 @@ def acharletra (c):
         d.write (c.upper(), font=("Arial", 25, "bold"))
         d.back (p.find (c, y)*25+p.find(c, y)*5)
         y += p.find (c)+1
+        letras += 1
         
-        
-def acertarpalavra ():
-    
-    chute = turtle.textinput ("Digite seu chute", "Digite seu chute")
-    
     
         
         
-acharletra ()
+def acertarpalavra ():   
     
+    
+    while letras < len (p):
+      
+        chute = turtle.textinput ("Digite seu chute", "Digite seu chute")
+        acharletra (chute)
+    
+acertarpalavra () 
 
 
     
