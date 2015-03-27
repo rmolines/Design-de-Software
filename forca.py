@@ -20,13 +20,25 @@ sorteio = randint (0,11)
 t = text.readlines ()
 p = "banana"
 
+forca = turtle.Turtle ()
+forca.penup ()
+forca.setpos (-300,-150)
+forca.pendown ()
+forca.left (90)
+forca.forward (400)
+forca.right (90)
+forca.forward (150)
+forca.right (90)
+forca.forward (100)
+
 d = turtle.Turtle ()
-d.penup ()
-d.setpos (-200, -200)
-d.pendown ()
 
 
 def linhas ():
+    
+    d.penup ()
+    d.setpos (-200, -200)
+    d.pendown ()
             
     for i in p:
         d.forward (25)
@@ -34,16 +46,17 @@ def linhas ():
         d.forward (5)
         d.pendown ()
         
+    d.penup ()
+    d.back (25*len (p)+5*len (p))
+
+        
 linhas ()
 
-d.penup ()
-d.back (25*len (p)+5*len (p))
-
-
-
-acertos = []
+def desenharforca ():
+    
 
 letras = 0
+    
 
 def acharletra (c):
     
@@ -56,9 +69,10 @@ def acharletra (c):
         d.back (p.find (c, y)*25+p.find(c, y)*5)
         y += p.find (c)+1
         letras += 1
-        
     
         
+            
+    
         
 def acertarpalavra ():   
     
