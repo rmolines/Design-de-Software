@@ -18,7 +18,9 @@ text = open ("entrada.txt", encoding = "utf-8")
 sorteio = randint (0,11)
 
 t = text.readlines ()
-p = "banana"
+x = "Sao Paulo"
+p = x.upper ()
+
 
 forca = turtle.Turtle ()
 forca.hideturtle ()
@@ -103,11 +105,15 @@ def acharletra (c):
     
     y = 0
     while p.find(c, y) != -1:
-        d.forward (p.find (c, y)*25+p.find(c, y)*5)
-        d.write (c.upper(), font=("Arial", 25, "bold"))
-        d.back (p.find (c, y)*25+p.find(c, y)*5)
-        y += p.find (c)+1
-        letras += 1
+        if chutes.find (c.upper ()) == -1:
+            d.forward (p.find (c, y)*25+p.find(c, y)*5)
+            d.write (c.upper(), font=("Arial", 25, "bold"))
+            d.back (p.find (c, y)*25+p.find(c, y)*5)
+            y += p.find (c)+1
+            letras += 1
+            chutes += c
+        else:
+            x.write ("Voce ja chutou esta letra")
         
     if p.find (c) == -1:
         if chutes.find (c.upper ()) == -1:        
@@ -116,7 +122,7 @@ def acharletra (c):
             x.write (c.upper (), font= ("Arial", 20))
             x.forward (20)
             chutes += c.upper ()
-            print (chutes.find (c))
+            
         else:
             x.write ("Voce ja chutou esta letra")
         
@@ -124,15 +130,25 @@ def acharletra (c):
         
 def acertarpalavra ():   
     
+    global erros
+    x = turtle.Turtle ()
+    x.hideturtle ()
     
     while letras < len (p):
-      
         chute = turtle.textinput ("Digite seu chute", "Digite seu chute")
-        acharletra (chute[0])
+        acharletra (chute[0].upper ())
+        print (len (p))
+        
     if letras == len (p):
-        x = turtle.Turtle ()
-        x.hideturtle ()
+
         x.write ("Parabens!\nVoce ganhou!\nDeseja jogar novamente?", font= ("Arial", 35))
+   
+    if erros == 6:
+        print (erros)
+        x.write ("Voce perdeu.\nDeseja jogar novamente?")
+        
+        for i in range (5):
+            forca.undo ()
     
 acertarpalavra () 
 
@@ -140,7 +156,7 @@ acertarpalavra ()
     
     
         
-janela.exitonclick ()
+
         
     
     
