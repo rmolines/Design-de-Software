@@ -18,9 +18,45 @@ text = open ("entrada.txt", encoding = "utf-8")
 sorteio = randint (0,11)
 
 t = text.readlines ()
-x = "Sao Paulo"
-p = x.upper ()
+p = t[1].upper ().strip ()
+p2 = p
+lenp = len (p)
+print (p)
 
+acentoA = "ÃÀÂÁ"
+acentoE = "ÉÊ"
+acentoO = "ÔÓÕ"
+acentoU = "Ú"
+acentoC = "Ç"
+acentoI = "Í"
+
+
+
+for i in p:
+    for n in acentoA:
+        if n == i:
+            p = p.replace (i, "A")
+            
+    for n in acentoE:
+        if n == i:
+            p = p.replace (i, "E")
+            
+    for n in acentoO:
+        if n == i:
+            p = p.replace (i, "O")
+            
+    for n in acentoU:
+        if n == i:
+            p = p.replace (i, "U")
+
+    for n in acentoC:
+        if n == i:
+            p = p.replace (i, "C")
+            
+    for n in acentoI:
+        if n == i:
+            p = p.replace (i, "I")
+ 
 
 forca = turtle.Turtle ()
 forca.hideturtle ()
@@ -43,15 +79,24 @@ def linhas ():
     d.penup ()
     d.setpos (-320, -300)
     d.pendown ()
-            
+    
+    global lenp
+    
     for i in p:
-        d.forward (25)
-        d.penup ()
-        d.forward (5)
-        d.pendown ()
+        
+        if i == " ":
+            d.penup ()
+            d.forward (23)
+            d.pendown ()
+            lenp -= 1
+        else:                
+            d.forward (20)
+            d.penup ()
+            d.forward (3)
+            d.pendown ()
         
     d.penup ()
-    d.back (25*len (p)+5*len (p))
+    d.back (20*len (p)+3*len (p))
 
         
 linhas ()
@@ -93,7 +138,15 @@ erros = 0
 x = turtle.Turtle ()
 x.penup ()
 x.hideturtle ()
-x.goto (100, 100)
+x.goto (0, 200)
+x.write ("Letras chutadas")
+x.goto (0, 150)
+
+frase = turtle.Turtle ()
+frase.hideturtle ()
+frase.penup ()
+frase.goto (0, 100)
+frase.pendown ()
 
 chutes = ""
 
@@ -104,16 +157,22 @@ def acharletra (c):
     global letras    
     
     y = 0
-    while p.find(c, y) != -1:
-        if chutes.find (c.upper ()) == -1:
-            d.forward (p.find (c, y)*25+p.find(c, y)*5)
-            d.write (c.upper(), font=("Arial", 25, "bold"))
-            d.back (p.find (c, y)*25+p.find(c, y)*5)
-            y += p.find (c)+1
+    
+    frase.undo ()
+    
+    if chutes.find (c.upper ()) == -1:    
+        while p.find(c, y) != -1:        
+            d.forward (p.find (c, y)*20+p.find(c, y)*3)
+            d.write (p2[p.find(c, y)], font=("Arial", 20, "bold"))
+            d.back (p.find (c, y)*20+p.find(c, y)*3)
+            print (p.find(c, y), y)
+            y = p.find (c, y)+1
             letras += 1
             chutes += c
-        else:
-            x.write ("Voce ja chutou esta letra")
+            
+            
+    else:
+        frase.write ("Voce ja chutou esta letra")
         
     if p.find (c) == -1:
         if chutes.find (c.upper ()) == -1:        
@@ -124,7 +183,7 @@ def acharletra (c):
             chutes += c.upper ()
             
         else:
-            x.write ("Voce ja chutou esta letra")
+            frase.write ("Voce ja chutou esta letra")
         
     
         
@@ -134,12 +193,12 @@ def acertarpalavra ():
     x = turtle.Turtle ()
     x.hideturtle ()
     
-    while letras < len (p):
+    while letras < lenp:
         chute = turtle.textinput ("Digite seu chute", "Digite seu chute")
         acharletra (chute[0].upper ())
-        print (len (p))
         
-    if letras == len (p):
+        
+    if letras == lenp:
 
         x.write ("Parabens!\nVoce ganhou!\nDeseja jogar novamente?", font= ("Arial", 35))
    
@@ -149,8 +208,11 @@ def acertarpalavra ():
         
         for i in range (5):
             forca.undo ()
-    
+ 
+print (lenp, p2, p)   
 acertarpalavra () 
+
+janela.exitonclick ()
 
 
     
