@@ -18,10 +18,10 @@ text = open ("entrada.txt", encoding = "utf-8")
 sorteio = randint (0,11)
 
 t = text.readlines ()
-p = t[1].upper ().strip ()
+p = t[0].upper ().strip ()
 p2 = p
 lenp = len (p)
-print (p)
+
 
 acentoA = "ÃÀÂÁ"
 acentoE = "ÉÊ"
@@ -72,6 +72,7 @@ forca.forward (100)
 
 
 d = turtle.Turtle ()
+d.hideturtle ()
 
 
 def linhas ():
@@ -139,7 +140,7 @@ x = turtle.Turtle ()
 x.penup ()
 x.hideturtle ()
 x.goto (0, 200)
-x.write ("Letras chutadas")
+x.write ("Letras chutadas:")
 x.goto (0, 150)
 
 frase = turtle.Turtle ()
@@ -165,7 +166,6 @@ def acharletra (c):
             d.forward (p.find (c, y)*20+p.find(c, y)*3)
             d.write (p2[p.find(c, y)], font=("Arial", 20, "bold"))
             d.back (p.find (c, y)*20+p.find(c, y)*3)
-            print (p.find(c, y), y)
             y = p.find (c, y)+1
             letras += 1
             chutes += c
@@ -178,41 +178,72 @@ def acharletra (c):
         if chutes.find (c.upper ()) == -1:        
             erros += 1        
             desenharforca (erros)
-            x.write (c.upper (), font= ("Arial", 20))
-            x.forward (20)
+            x.write (c.upper (), font= ("Arial", 15))
+            x.forward (17)
             chutes += c.upper ()
             
         else:
             frase.write ("Voce ja chutou esta letra")
+    print (erros) 
+
+
+def restart (x, y):
+    if x<120 and x>0 and y<120 and y >0:
+        forca.clear
+        d.cleary.clear
+        x.clear
+        linhas ()
+        acertarpalavra ()
         
-    
+def coor (x, y):
+    print (x, y)
         
-def acertarpalavra ():   
-    
+def acertarpalavra ():
+        
     global erros
-    x = turtle.Turtle ()
-    x.hideturtle ()
+     
+   
+    y = turtle.Turtle ()
+    y.hideturtle ()
     
     while letras < lenp:
         chute = turtle.textinput ("Digite seu chute", "Digite seu chute")
+        if chute == "":
+            continue
         acharletra (chute[0].upper ())
+       
+        if erros == 6:
         
-        
+            y.write ("Voce perdeu.\nDigite 'S' para jogar novamente", font= ("Arial", 20))        
+            r = turtle.textinput ("'S' para jogar", "")
+            if r.upper() == "S":
+                forca.clear ()
+                d.clear ()
+                acertarpalavra ()
+            else:
+                turtle.bye ()                
+   
     if letras == lenp:
 
-        x.write ("Parabens!\nVoce ganhou!\nDeseja jogar novamente?", font= ("Arial", 35))
-   
-    if erros == 6:
-        print (erros)
-        x.write ("Voce perdeu.\nDeseja jogar novamente?")
+        y.write ("Parabens!\nVoce ganhou!\nDigite 'S' para jogar novamente", font= ("Arial", 25))
+        n = turtle.textinput ("'S' para jogar", "")
+        if n.upper() == "S":
+            forca.clear ()
+            d.clear ()
+            acertarpalavra ()
+        else:
+            turtle.bye ()
         
-        for i in range (5):
-            forca.undo ()
+    if erros == 6:
+        
+        y.write ("Voce perdeu.\nDeseja jogar novamente?", font= ("Arial", 25))
+       
+    forca.clear ()
  
-print (lenp, p2, p)   
 acertarpalavra () 
 
-janela.exitonclick ()
+
+
 
 
     
