@@ -13,7 +13,7 @@ while pc < 3 and jg  < 3:
     
     y = randint (1,5)
     
-    jogador = input("Estou pronto, escolha sua jogada (pedra, papel, tesoura, lagarto ou Spock).\n")
+    jogador = input("Estou pronto! Escolha sua jogada (pedra, papel, tesoura, lagarto ou Spock).\n")
     
     x = jogador.upper()
     
@@ -43,27 +43,27 @@ while pc < 3 and jg  < 3:
     elif x == "SPOCK":
         x = 5
     else:
-        print ("Voce escreveu errado.")
+        print ("Você escreveu errado.")
         continue
         
     
-    print (z)
+    print ("Eu escolhi", z)
     
     
     if y == x+1 or y == x-2 or y == x-4 or y == x+3:
-        print ("Ganhou\n")
+        print ("Você ganhou!\n")
         jg += 1
     elif x == y:
-        print("Empatou")
+        print("Deu empate.\n")
     else:
-        print ("Perdeu")
+        print ("Você perdeu.\n")
         pc += 1
     
     print ("Placar:\nComputador: %d x Jogador: %d\n" % (pc, jg))
         
 if jg == 3:
-    print ("Voce ganhou o jogo")
+    print ("Você ganhou o jogo!")
 elif pc == 3:
-    print ("Voce perdeu o jogo")
+    print ("Você perdeu o jogo.")
         
 
